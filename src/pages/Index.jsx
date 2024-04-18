@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { VStack, Input, Button, Checkbox, Text, IconButton } from "@chakra-ui/react";
 import { FaPlus, FaTrash } from "react-icons/fa";
-
+import { Flex } from '@chakra-ui/react';
+import Sidebar from '../components/Sidebar';
 const Index = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
@@ -22,7 +23,9 @@ const Index = () => {
   };
 
   return (
-    <VStack spacing={4} align="stretch" w="100%" maxW="400px" m="auto">
+    <Flex>
+      <Sidebar />
+      <VStack spacing={4} align='stretch' w='100%' maxW='400px' m='auto'>
       <Input placeholder="Add a new todo" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
       <Button leftIcon={<FaPlus />} onClick={handleAddTodo}>
         Add Todo
@@ -33,7 +36,8 @@ const Index = () => {
           <IconButton icon={<FaTrash />} colorScheme="red" variant="ghost" size="sm" onClick={() => handleDeleteTodo(todo.id)} />
         </Checkbox>
       ))}
-    </VStack>
+      </VStack>
+    </Flex>
   );
 };
 
