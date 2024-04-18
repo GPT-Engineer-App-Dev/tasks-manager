@@ -8,6 +8,7 @@ const Index = () => {
 const [selectedCategory, setSelectedCategory] = useState(1);
 const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
+  const [newCategory, setNewCategory] = useState("");
 
   const handleAddTodo = () => {
     if (newTodo.trim() !== "") {
@@ -32,6 +33,15 @@ const [todos, setTodos] = useState([]);
   onSelectCategory={setSelectedCategory}
 />
       <VStack spacing={4} align='stretch' w='100%' maxW='400px' m='auto'>
+      <Input placeholder="Add a new category" value={newCategory} onChange={(e) => setNewCategory(e.target.value)} />
+      <Button leftIcon={<FaPlus />} onClick={() => {
+        if (newCategory.trim() !== "") {
+          setCategories([...categories, { id: categories.length + 1, name: newCategory }]);
+          setNewCategory("");
+        }
+      }}>
+        Add Category
+      </Button>
       <Input placeholder="Add a new todo" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
       <Button leftIcon={<FaPlus />} onClick={handleAddTodo}>
         Add Todo
