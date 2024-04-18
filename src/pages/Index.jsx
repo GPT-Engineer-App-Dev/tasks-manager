@@ -32,9 +32,9 @@ const [todos, setTodos] = useState([]);
   selectedCategory={selectedCategory}
   onSelectCategory={setSelectedCategory}
 />
-      <VStack spacing={4} align='stretch' w='100%' pl={8}>
-      <Input placeholder="Add a new category" value={newCategory} onChange={(e) => setNewCategory(e.target.value)} />
-      <Button leftIcon={<FaPlus />} onClick={() => {
+      <VStack spacing={6} align='stretch' w='100%' p={8}>
+      <Input placeholder="Add a new category" value={newCategory} onChange={(e) => setNewCategory(e.target.value)} mb={4} />
+      <Button colorScheme="blue" leftIcon={<FaPlus />} onClick={() => {
         if (newCategory.trim() !== "") {
           setCategories([...categories, { id: categories.length + 1, name: newCategory }]);
           setNewCategory("");
@@ -42,14 +42,14 @@ const [todos, setTodos] = useState([]);
       }}>
         Add Category
       </Button>
-      <Input placeholder="Add a new todo" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
-      <Button leftIcon={<FaPlus />} onClick={handleAddTodo}>
+      <Input placeholder="Add a new todo" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} mt={8} mb={4} />
+      <Button colorScheme="green" leftIcon={<FaPlus />} onClick={handleAddTodo}>
         Add Todo
       </Button>
       {todos
   .filter((todo) => todo.categoryId === selectedCategory)
   .map((todo) => (
-        <Checkbox key={todo.id} isChecked={todo.isCompleted} onChange={() => handleToggleTodo(todo.id)} w='100%'>
+        <Checkbox key={todo.id} isChecked={todo.isCompleted} onChange={() => handleToggleTodo(todo.id)} w='100%' mt={4}>
           <Text textDecoration={todo.isCompleted ? "line-through" : "none"}>{todo.text}</Text>
           <IconButton icon={<FaTrash />} colorScheme="red" variant="ghost" size="sm" onClick={() => handleDeleteTodo(todo.id)} />
         </Checkbox>

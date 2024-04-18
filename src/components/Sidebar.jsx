@@ -3,7 +3,7 @@ import { VStack, Box, Text } from '@chakra-ui/react';
 
 const Sidebar = ({ categories, selectedCategory, onSelectCategory }) => {
   return (
-    <VStack w="200px" h="100vh" p={4} bg="gray.100">
+    <VStack w="250px" h="100vh" p={6} bg="gray.50" borderRight="1px" borderColor="gray.200">
       <Box>
         {categories.map((category) => (
   <Box
@@ -13,7 +13,7 @@ const Sidebar = ({ categories, selectedCategory, onSelectCategory }) => {
     p={2}
     cursor="pointer"
   >
-    <Text>{category.name}</Text>
+    <Text fontWeight="bold">{category.name}</Text>
   </Box>
 ))}  
       </Box>
