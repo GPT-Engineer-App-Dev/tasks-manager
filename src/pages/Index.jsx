@@ -4,12 +4,14 @@ import { FaPlus, FaTrash } from "react-icons/fa";
 import { Flex } from '@chakra-ui/react';
 import Sidebar from '../components/Sidebar';
 const Index = () => {
-  const [todos, setTodos] = useState([]);
+  const [categories, setCategories] = useState([{ id: 1, name: 'Default' }]);
+const [selectedCategory, setSelectedCategory] = useState(1);
+const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
 
   const handleAddTodo = () => {
     if (newTodo.trim() !== "") {
-      setTodos([...todos, { id: todos.length + 1, text: newTodo, isCompleted: false }]);
+      setTodos([...todos, { id: todos.length + 1, text: newTodo, isCompleted: false, categoryId: selectedCategory }]);
       setNewTodo("");
     }
   };
@@ -24,13 +26,19 @@ const Index = () => {
 
   return (
     <Flex>
-      <Sidebar />
+      <Sidebar 
+  categories={categories}
+  selectedCategory={selectedCategory}
+  onSelectCategory={setSelectedCategory}
+/>
       <VStack spacing={4} align='stretch' w='100%' maxW='400px' m='auto'>
       <Input placeholder="Add a new todo" value={newTodo} onChange={(e) => setNewTodo(e.target.value)} />
       <Button leftIcon={<FaPlus />} onClick={handleAddTodo}>
         Add Todo
       </Button>
-      {todos.map((todo) => (
+      {todos
+  .filter((todo) => todo.categoryId === selectedCategory)
+  .map((todo) => (
         <Checkbox key={todo.id} isChecked={todo.isCompleted} onChange={() => handleToggleTodo(todo.id)}>
           <Text textDecoration={todo.isCompleted ? "line-through" : "none"}>{todo.text}</Text>
           <IconButton icon={<FaTrash />} colorScheme="red" variant="ghost" size="sm" onClick={() => handleDeleteTodo(todo.id)} />
